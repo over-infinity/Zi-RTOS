@@ -1,4 +1,4 @@
-# Zi-RTOS
+![Zi-RTOS](https://github.com/over-infinity/Zi-RTOS/blob/main/core/Zi.png)
 
 **_What is Zi-RTOS_** 
 
