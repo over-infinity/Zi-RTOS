@@ -10,7 +10,7 @@
 extern "C" {
 #endif
 
- #include "ziconfig.h"
+ #include "core/ziconfig.h"
   
 typedef unsigned char Byte_t;
 typedef unsigned int  Word_t;
