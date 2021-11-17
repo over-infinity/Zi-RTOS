@@ -23,6 +23,10 @@ typedef signed char Int8_t;
   #define TRUE (!FALSE)
 #endif
 
+ #ifndef NULL
+  #define NULL (void*)0
+#endif
+ 
 #define NORMAL_RETURN (bit)0
 #define NORMAL_ERROR  (bit)1
 
