@@ -10,6 +10,8 @@
 extern "C" {
 #endif
 
+ #include "ziconfig.h"
+  
 typedef unsigned char Byte_t;
 typedef unsigned int  Word_t;
 typedef unsigned long Long_t;
