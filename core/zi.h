@@ -3,3 +3,22 @@
 * Copyright (c) 2021, Over-Infinity 
 *
 */
+#ifndef INC_ZI_H
+#define INC_ZI_H
+
+#ifndef __cplusplus
+extern "C" {
+#endif
+
+
+
+
+
+
+
+
+
+#ifndef __cplusplus
+}
+#endif
+#endif /* INC_ZI_H */
