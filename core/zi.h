@@ -34,7 +34,8 @@ typedef struct{
   Word_t delay;
   Word_t period;
   Byte_t priority;
-  Byte_t run_freq;  
+  Byte_t run_freq;
+  Byte_t suspended;
 }TCB_t;  
 
   /* Public APIs prototypes */
