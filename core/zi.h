@@ -52,7 +52,7 @@ typedef struct{
   void Zi_Start();
   void Zi_Stop();
   
-  DoubleLong_t Zi_TickCount();
+  DoubleLong_t Zi_GetTickCount();
 
 #ifndef __cplusplus
 }
