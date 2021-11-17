@@ -40,7 +40,10 @@ Byte_t Zi_Remove_Task(Byte_t){
     
 void Zi_Suspend_Task(Byte_t taskId){
   
-  
+  if(Zi_TaskList[taskId].task != NULL)(
+     Zi_TaskList[taskId].suspended =TRUE;
+    }
+    
 }
 
 void Zi_Resume_Task(Byte_t taskId){
