@@ -23,11 +23,15 @@ void Zi_Init(void){
   
 }  
 /****************************************************************
- * @function  :Zi_Add_Task
+ * @name i_Add_Task
  * @brief     :add new task to the Zi_TaskList if there is not any 
                empty entry in the Zi_TaskList, it return error.
- * @input     :
- * @return    :
+ * @param  handle pointer to function task.
+ * @param  delay this param indicate that  delay before executing task
+ * @param  period indicate period frequency of executing task. if task is one-shot runing set
+ *                period to zero
+ * @param  priority task priority (high value more priority).
+ * @return    return taskId of recently added task or error code(ERROR_TWO_MANY_TASK)
  * @author    :over-infinity
  * @date      :18-11-2021
  ****************************************************************/
