@@ -22,7 +22,15 @@ void Zi_Init(void){
   Zi_TickCount=0;
   
 }  
-
+/****************************************************************
+ * @function  :Zi_Add_Task
+ * @brief     :add new task to the Zi_TaskList if there is not any 
+               empty entry in the Zi_TaskList, it return error.
+ * @input     :
+ * @return    :
+ * @author    :over-infinity
+ * @date      :18-11-2021
+ ****************************************************************/
 Int8_t Zi_Add_Task(TaskHandler_t handler, const Word_t delay, Word_t period, Byte_t priority){ 
   Byte_t taskId =0;  
   
@@ -57,14 +65,14 @@ Int8_t Zi_Remove_Task(const Byte_t taskId){
   return NORMAL_RETURN;
 }
 
-/**********************************************
+/****************************************************************
  * @function  :Zi_Suspend_Task
- * @brief     :suspended task by getting taskId we simply set a suspended field in
- *              the task TCB.
+ * @brief     :suspended task by getting taskId we simply
+ *             set a suspended field in the task TCB.
  * @input     :taskId, taskId will return by Zi_Add_Task function.
  * @author    :over-infinity
  * @date      :18-11-2021
- **********************************************/ 
+ ****************************************************************/ 
 void Zi_Suspend_Task(const Byte_t taskId){
   
   if(Zi_TaskList[taskId].task != NULL){
