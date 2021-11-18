@@ -17,7 +17,7 @@ TCB_t Zi_TaskSuspended[ZI_MAX_TASKS ];
 void Zi_Init(void){ 
   
   for(int i=0; i < ZI_MAX_TASKS; i++){
-    Zi_Resume_Task(i);
+    Zi_Remove_Task(i);
   }
   
   Zi_TickCount=0;
@@ -29,16 +29,41 @@ void Zi_Dispath_Task(void){
 }
 
 
-Byte_t Zi_Add_Task(TaskHandler_t handler, const Word_t delay, Word_t period, Byte_t priority){ 
+Int8_t Zi_Add_Task(TaskHandler_t handler, const Word_t delay, Word_t period, Byte_t priority){ 
+  Byte_t taskId =0;  
   
+  while((Zi_TaskList[taskId].task != NULL) && (taskId < ZI_MAX_TASKS))
+    taskId++;
   
+  if(taskId == ZI_MAX_TASKS)
+    return ERROR_TWO_MANY_TASK;
+  
+  Zi_TaskList[taskId].task =handler;
+  Zi_TaskList[taskId].delay=delay;
+  Zi_TaskList[taskId].period=period;
+  Zi_TaskList[taskId].priority=priority;
+  Zi_TaskList[taskId].suspended=FALSE;
+  
+  return taskId;  
 }
 
-Byte_t Zi_Remove_Task(Byte_t){
+Int8_t Zi_Remove_Task(const Byte_t taskId){
   
+  if(Zi_TaskList[taskId].task == NULL){ 
+    // task is already has been deleted or no task to delete.
+    return ERROR_DELETE_TASK;    
+  }
+  
+  Zi_TaskList[taskId].task =NULL;
+  Zi_TaskList[taskId].delay=0;
+  Zi_TaskList[taskId].period=0;
+  Zi_TaskList[taskId].priority=0;
+  Zi_TaskList[taskId].suspended=FALSE;
+  
+  return NORMAL_RETURN;
 }
     
-void Zi_Suspend_Task(Byte_t taskId){
+void Zi_Suspend_Task(const Byte_t taskId){
   
   if(Zi_TaskList[taskId].task != NULL)(
      Zi_TaskList[taskId].suspended =TRUE;
@@ -46,7 +71,7 @@ void Zi_Suspend_Task(Byte_t taskId){
     
 }
 
-void Zi_Resume_Task(Byte_t taskId){
+void Zi_Resume_Task(const Byte_t taskId){
   
   
 }
