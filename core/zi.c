@@ -11,8 +11,8 @@
 DoubleLong_t Zi_TickCount;
 static Byte_t Zi_ActiveScheduler = 0;
 
-TCB_t Zi_TaskList[ZI_MAX_TASKS ];
-TCB_t Zi_TaskSuspended[ZI_MAX_TASKS ];
+TCB_t Zi_TaskList[ZI_MAX_TASKS];
+//TCB_t Zi_TaskSuspended[ZI_MAX_TASKS];
 
 void Zi_Init(void){ 
   
@@ -65,7 +65,7 @@ Int8_t Zi_Remove_Task(const Byte_t taskId){
     
 void Zi_Suspend_Task(const Byte_t taskId){
   
-  if(Zi_TaskList[taskId].task != NULL)(
+  if(Zi_TaskList[taskId].task != NULL){
      Zi_TaskList[taskId].suspended =TRUE;
     }
     
@@ -73,7 +73,9 @@ void Zi_Suspend_Task(const Byte_t taskId){
 
 void Zi_Resume_Task(const Byte_t taskId){
   
-  
+  if(Zi_TaskList[taskId].task != NULL){
+     Zi_TaskList[taskId].suspended =FALSE;
+    }
 }
    
 void Zi_Delay(Long_t tick){  
