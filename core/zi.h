@@ -55,6 +55,8 @@ typedef struct{
   Int8_t Zi_Remove_Task(const Byte_t);
   void Zi_Suspend_Task(const Byte_t taskId);
   void Zi_Resume_Task(const Byte_t taskId);
+ 
+ void Zi_Scheduler(void);
    
   void Zi_Delay(Long_t tick);
   void Zi_Start();
