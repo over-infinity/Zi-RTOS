@@ -9,7 +9,7 @@
 #include "core/zi.h"
 
 DoubleLong_t Zi_TickCount;
-static Byte_t Zi_ActiveScheduler = 0;
+static Byte_t Zi_ActiveScheduler = FALSE;
 
 TCB_t Zi_TaskList[ZI_MAX_TASKS];
 //TCB_t Zi_TaskSuspended[ZI_MAX_TASKS];
@@ -87,11 +87,13 @@ void Zi_Delay(Long_t tick){
 
 
 void Zi_Start(){
-  
+  if(!Zi_ActiveScheduler)
+    Zi_ActiveScheduler=TRUE;
 }
 
 void Zi_Stop(){
-  
+  if(Zi_ActiveScheduler)
+    Zi_ActiveScheduler=FALSE;
 }
   
 DoubleLong_t Zi_GetTickCount(){  
