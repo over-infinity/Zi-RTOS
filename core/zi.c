@@ -132,8 +132,23 @@ void Zi_Dispath_Task(void){
   
 }
 
-void Zi_Scheduler(void){
-  
-  
-}
+/* Zi_Scheduler : increment tick count and update internal tasks state  */
+void Zi_Scheduler(void){  
+  Zi_TickCount++;
+  if(Zi_ActiveScheduler){
+    for(int i=0; i< ZI_MAX_TASKS; i++){
+      if(Zi_TaskList[i].task !=  NULL)
+        if(Zi_TaskList[i].delay == 0 ){
+          Zi_TaskList[i].run_freq +=1;
+          if(Zi_TaskList[i].period)
+            Zi_TaskList[i].delay=Zi_TaskList[i].period;          
+        }else{
+          Zi_TaskList[i].delay -=1;
+        }      
+    } // end for    
+  }  //end if(Zi_ActiveScheduler)
+} // end Zi_Scheduler function
+
+
+
 
