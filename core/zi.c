@@ -12,7 +12,6 @@ DoubleLong_t Zi_TickCount;
 static Byte_t Zi_ActiveScheduler = FALSE;
 
 TCB_t Zi_TaskList[ZI_MAX_TASKS];
-//TCB_t Zi_TaskSuspended[ZI_MAX_TASKS];
 
 void Zi_Init(void){ 
   
@@ -63,8 +62,7 @@ void Zi_Suspend_Task(const Byte_t taskId){
   
   if(Zi_TaskList[taskId].task != NULL){
      Zi_TaskList[taskId].suspended =TRUE;
-    }
-    
+    }   
 }
 
 void Zi_Resume_Task(const Byte_t taskId){
@@ -73,14 +71,13 @@ void Zi_Resume_Task(const Byte_t taskId){
      Zi_TaskList[taskId].suspended =FALSE;
     }
 }
-   
+
 void Zi_Delay(Long_t tick){  
   Long_t endTick=Zi_TickCount+tick;
   while(Zi_TickCount < endTick){
     ;
   }  
 }
-
 
 void Zi_Start(){
   if(!Zi_ActiveScheduler)
@@ -96,7 +93,6 @@ DoubleLong_t Zi_GetTickCount(){
   return Zi_TickCount;   
 }
 
-
 /**  Return taskId of the most high priority task to execute **/
 static Int8_t Zi_GetNextTaskId(void){  
   
@@ -109,8 +105,7 @@ static Int8_t Zi_GetNextTaskId(void){
         taskIndex=i;
       }else if(Zi_TaskList[i].priority > Zi_TaskList[taskIndex].priority){
         taskIndex=i;        
-      }
-      
+      }   
     }    
   }  
   return taskIndex; 
@@ -129,7 +124,6 @@ void Zi_Dispath_Task(void){
     if(Zi_TaskList[taskId].period ==0)
       Zi_Remove_Task(taskId);       
   }  
-  
 }
 
 /* Zi_Scheduler : increment tick count and update internal tasks state  */
