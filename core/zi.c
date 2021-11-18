@@ -57,7 +57,14 @@ Int8_t Zi_Remove_Task(const Byte_t taskId){
   return NORMAL_RETURN;
 }
 
-
+/**********************************************
+ * @function  :Zi_Suspend_Task
+ * @brief     :suspended task by getting taskId we simply set a suspended field in
+ *              the task TCB.
+ * @input     :taskId, taskId will return by Zi_Add_Task function.
+ * @author    :over-infinity
+ * @date      :18-11-2021
+ **********************************************/ 
 void Zi_Suspend_Task(const Byte_t taskId){
   
   if(Zi_TaskList[taskId].task != NULL){
