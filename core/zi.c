@@ -24,30 +24,6 @@ void Zi_Init(void){
   
 }  
 
-/**  Return taskId of the most high priority task to execute **/
-static Int8_t Zi_GetNextTaskId(void){  
-  
-  Int8_t taskIndex=-1;
-  
-  for(int i = 0; i < ZI_MAX_TASKS ; i++){
-    if(Zi_TaskList[i].run_freq > 0 && Zi_TaskList[i].suspended == FALSE){
-      
-      if(taskIndex < 0){
-        taskIndex=i;
-      }else if(Zi_TaskList[i].priority > Zi_TaskList[taskIndex].priority){
-        taskIndex=i;        
-      }
-      
-    }    
-  }  
-  return taskIndex; 
-}
-
-void Zi_Dispath_Task(void){  
-  
-}
-
-
 Int8_t Zi_Add_Task(TaskHandler_t handler, const Word_t delay, Word_t period, Byte_t priority){ 
   Byte_t taskId =0;  
   
@@ -81,7 +57,8 @@ Int8_t Zi_Remove_Task(const Byte_t taskId){
   
   return NORMAL_RETURN;
 }
-    
+
+
 void Zi_Suspend_Task(const Byte_t taskId){
   
   if(Zi_TaskList[taskId].task != NULL){
@@ -118,3 +95,45 @@ void Zi_Stop(){
 DoubleLong_t Zi_GetTickCount(){  
   return Zi_TickCount;   
 }
+
+
+/**  Return taskId of the most high priority task to execute **/
+static Int8_t Zi_GetNextTaskId(void){  
+  
+  Int8_t taskIndex=-1;
+  
+  for(int i = 0; i < ZI_MAX_TASKS ; i++){
+    if(Zi_TaskList[i].run_freq > 0 && Zi_TaskList[i].suspended == FALSE){
+      
+      if(taskIndex < 0){
+        taskIndex=i;
+      }else if(Zi_TaskList[i].priority > Zi_TaskList[taskIndex].priority){
+        taskIndex=i;        
+      }
+      
+    }    
+  }  
+  return taskIndex; 
+}
+
+void Zi_Dispath_Task(void){  
+  
+  Int8_t taskId = Zi_GetNextTaskId();
+  
+  if(taskId >= 0){
+    /* execute task with high priority */
+    (*Zi_TaskList[taskId].task)();
+    
+    Zi_TaskList[taskId].run_freq -=1;
+    
+    if(Zi_TaskList[taskId].period ==0)
+      Zi_Remove_Task(taskId);       
+  }  
+  
+}
+
+void Zi_Scheduler(void){
+  
+  
+}
+
