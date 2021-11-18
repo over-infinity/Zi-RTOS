@@ -23,7 +23,26 @@ void Zi_Init(void){
   Zi_TickCount=0;
   
 }  
+
+/**  Return taskId of the most high priority task to execute **/
+static Int8_t Zi_GetNextTaskId(void){  
   
+  Int8_t taskIndex=-1;
+  
+  for(int i = 0; i < ZI_MAX_TASKS ; i++){
+    if(Zi_TaskList[i].run_freq > 0 && Zi_TaskList[i].suspended == FALSE){
+      
+      if(taskIndex < 0){
+        taskIndex=i;
+      }else if(Zi_TaskList[i].priority > Zi_TaskList[taskIndex].priority){
+        taskIndex=i;        
+      }
+      
+    }    
+  }  
+  return taskIndex; 
+}
+
 void Zi_Dispath_Task(void){  
   
 }
