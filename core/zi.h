@@ -6,7 +6,7 @@
 #ifndef INC_ZI_H
 #define INC_ZI_H
 
-#ifndef __cplusplus
+#ifdef __cplusplus
 extern "C" {
 #endif
 
@@ -17,7 +17,6 @@ typedef unsigned int  Word_t;
 typedef unsigned long Long_t;
 typedef unsigned long long DoubleLong_t;
 typedef signed char Int8_t;
-
   
 #ifndef TRUE
   #define FALSE 0
@@ -25,11 +24,11 @@ typedef signed char Int8_t;
 #endif
 
  #ifndef NULL
-  #define NULL (void*)0
+  #define NULL (void*)(0)
 #endif
  
 #define NORMAL_RETURN          (0)
-#define ERROR_GENRAL           (-1)    // genral error
+#define ERROR_GENERAL           (-1)    // general error
 #define ERROR_TWO_MANY_TASK    (-2)    // task list add error, task list is already full
 #define ERROR_DELETE_TASK      (-3)    // delete task error
 
@@ -64,7 +63,7 @@ typedef struct{
   
   DoubleLong_t Zi_GetTickCount();
 
-#ifndef __cplusplus
+#ifdef __cplusplus
 }
 #endif
 #endif /* INC_ZI_H */
