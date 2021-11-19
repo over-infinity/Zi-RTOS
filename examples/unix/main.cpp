@@ -9,7 +9,20 @@
 #include <iostream>
 #include "core/zi.h"
 
+void Task_1(void){
+	std::cout << "Execute Task 1" << std::endl;
+}
+
+void Task_2(void){
+	std::cout << "Execute Task 2" << std::endl;	
+}
+
+
 int main(int argc, char** argv){
-	std::cout << "Hello World" << std::endl;
+
+	int task1Id = Zi_Add_Task(Task_1,100000,100000,2);
+	int task2Id = Zi_Add_Task(Task_2,200000,200000,2);
+
+
 	return 0;
 }
