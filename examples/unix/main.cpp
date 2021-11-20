@@ -11,6 +11,11 @@
 #include <iostream>
 #include "core/zi.h"
 
+/*  this task is responsible for intial hardware, GPIOs  and etc. so it is onshut executing */
+void Task_Init(void){
+	std::cout << "Initial Hardware" << std::endl;
+}
+
 void Task_1(void){
 	std::cout << "Execute Task 1" << std::endl;
 }
@@ -25,8 +30,11 @@ int main(int argc, char** argv){
 	Zi_Init();
 	
 	// Add application task to the task list
+	
+	int task0Id = Zi_Add_Task(Task_Init,1,0,3);
 	int task1Id = Zi_Add_Task(Task_1,10000000,10000000,2);
 	int task2Id = Zi_Add_Task(Task_2,5000000,5000000,1);
+	
 	/*executing frequency of task 2 is twice of task 1. 
 	for exit from program press ctrl+z in linux*/
 
